@@ -8,10 +8,7 @@ new_data <- data %>% filter(type == "Run")
 new_data <- new_data %>% filter(distance > 400 & distance <= 45000) %>% 
   filter(average_speed <= 15 & average_speed > 0.1) 
 
-data_males <- new_data %>% filter(athlete.sex == "M")
-
-data_females <- new_data %>% filter(athlete.sex == "F")
-
+write.csv(new_data, "cleaned_data.csv")
 write.csv(data_males, "data_males.csv")
 write.csv(data_females, "data_females.csv")
 
