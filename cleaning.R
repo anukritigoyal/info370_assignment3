@@ -12,6 +12,8 @@ data_males <- new_data %>% filter(athlete.sex == "M")
 
 data_females <- new_data %>% filter(athlete.sex == "F")
 
+write.csv(data_males, "data_males.csv")
+write.csv(data_females, "data_females.csv")
 
 # Data cleaning for question 2
 countries_data <- data
@@ -45,3 +47,5 @@ relevant_countries <- countries_data %>% filter(athlete.country == "United State
                                               athlete.country == "South Africa")
 # time less than 6 hours 
 relevant_countries <- relevant_countries %>% filter(elapsed_time > 0 & elapsed_time < 21600)
+
+write.csv(relevant_countries, "relevant_countries.csv")
