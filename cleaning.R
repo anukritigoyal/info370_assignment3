@@ -44,5 +44,6 @@ relevant_countries <- countries_data %>% filter(athlete.country == "United State
                                               athlete.country == "South Africa")
 # time less than 6 hours 
 relevant_countries <- relevant_countries %>% filter(elapsed_time > 0 & elapsed_time < 21600)
+relevant_countries$athlete.country <- gsub(" ", "", relevant_countries$athlete.country)
 
 write.csv(relevant_countries, "relevant_countries.csv")
