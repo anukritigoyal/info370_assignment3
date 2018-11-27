@@ -3,6 +3,7 @@ library(dplyr)
 # load in data and split into data frames for male and female athletes
 data <- read.csv('strava_activity.csv')
 
+# Data cleaning for question 1
 new_data <- data %>% filter(type == "Run")
 new_data <- new_data %>% filter(distance > 400 & distance <= 45000) %>% 
   filter(average_speed <= 15 & average_speed > 0.1) 
@@ -10,5 +11,31 @@ new_data <- new_data %>% filter(distance > 400 & distance <= 45000) %>%
 data_males <- new_data %>% filter(athlete.sex == "M")
 
 data_females <- new_data %>% filter(athlete.sex == "F")
+
+
+# Data cleaning for question 2
+countries_data <- data
+
+countries_data$athlete.country <- sub("Italia", "Italy", countries_data$athlete.country)
+countries_data$athlete.country <- sub("Italie", "Italy", countries_data$athlete.country)
+countries_data$athlete.country <- sub("Italyn", "Italy", countries_data$athlete.country)
+countries_data$athlete.country <- sub("Nederland", "Netherlands", countries_data$athlete.country)
+countries_data$athlete.country <- sub("The Netherlands", "Netherlands", countries_data$athlete.country)
+countries_data$athlete.country <- sub("Deutschland", "Germany", countries_data$athlete.country)
+countries_data$athlete.country <- sub("Brasil", "Brazil", countries_data$athlete.country)
+countries_data$athlete.country <- sub("República Federativa do Brasil", "Brazil", countries_data$athlete.country)
+countries_data$athlete.country <- sub("República Federativa do Brazil", "Brazil", countries_data$athlete.country)
+countries_data$athlete.country <- sub("Bélgica", "Belgium", countries_data$athlete.country)
+countries_data$athlete.country <- sub("België", "Belgium", countries_data$athlete.country)
+countries_data$athlete.country <- sub("Belgique", "Belgium", countries_data$athlete.country)
+countries_data$athlete.country <- sub("Estados Unidos", "United States", countries_data$athlete.country)
+countries_data$athlete.country <- sub("México", "Mexico", countries_data$athlete.country)
+countries_data$athlete.country <- sub("Reino Unido", "United Kingdom", countries_data$athlete.country)
+countries_data$athlete.country <- sub("España", "Spain", countries_data$athlete.country)
+countries_data$athlete.country <- sub("Norge", "Norway", countries_data$athlete.country)
+countries_data$athlete.country <- sub("Kingdom of Norway", "Norway", countries_data$athlete.country)
+
+
+
 
 
