@@ -7,7 +7,9 @@ data <- read.csv('strava_activity.csv')
 names(data)
 
 # data of interest will include athlete.sex, average_speed, distance
-# for the second question we could examine exercise stats by location
+# for the second question we will examine elapsed_time and athlete.country
+
+#### EDA for the first Question
 
 # get proportion of users male or female in data
 summary(data$athlete.sex)
@@ -88,3 +90,41 @@ ggplot() +
     x = 'Distance (Meters)',
     y = 'Frequency'
   )
+
+##### EDA for the Second Quesiton
+
+# Examining columns athlete.country and elapsed_time
+
+# all country values in the data and values for each
+summary(data$athlete.country)
+
+# number of unique observations for athlete countries
+length(unique(data$athlete.country))
+
+# summary of elapsed time observations. Time is measured in seconds
+summary(data$elapsed_time)
+
+ggplot(data = data) +
+  stat_bin(mapping = aes(x = elapsed_time)) +
+  labs(
+    title = 'Distribution of Elapsed Time', 
+    x = 'Elapsed Time (Seconds)', 
+    y = 'Frequency'
+  )
+
+# observations with an elapsed_time under 6 hours
+# there are 21600 seconds in 6 hours
+time_small = filter(data, elapsed_time < 21600)
+# plot the distribution of time for under 6 hours
+ggplot(data = time_small) +
+  stat_bin(mapping = aes(x = elapsed_time)) +
+  labs(
+    title = 'Distribution of Elapsed Time', 
+    x = 'Elapsed Time (Seconds)',
+    y = 'Frequency'
+  )
+
+# examine summary statistics for elapsed time for the US, the UK, and Brazil
+summary(filter(data, athlete.country == 'United States')$elapsed_time)
+summary(filter(data, athlete.country == 'United Kingdom')$elapsed_time)
+summary(filter(data, athlete.country == 'Brazil')$elapsed_time)
