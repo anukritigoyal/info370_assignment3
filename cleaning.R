@@ -35,7 +35,13 @@ countries_data$athlete.country <- sub("España", "Spain", countries_data$athlete
 countries_data$athlete.country <- sub("Norge", "Norway", countries_data$athlete.country)
 countries_data$athlete.country <- sub("Kingdom of Norway", "Norway", countries_data$athlete.country)
 
+country_count <- countries_data %>% group_by(athlete.country) %>% summarise(count = n())
+country_count <- country_count %>% filter(athlete.country != "") %>% filter(count > 100)
 
-
-
-
+relevant_countries <- countries_data %>% filter(athlete.country == "United States" | athlete.country == "United Kingdom" |
+                                              athlete.country == "Australia" | athlete.country == "Brazil" | athlete.country == "Netherlands" |
+                                              athlete.country == "Canada" | athlete.country == "France" | athlete.country == "Spain" | 
+                                              athlete.country == "Italy" | athlete.country == "Germany" | athlete.country == "Norway" |
+                                              athlete.country == "South Africa")
+# time less than 6 hours 
+relevant_countries <- relevant_countries %>% filter(elapsed_time > 0 & elapsed_time < 21600)
